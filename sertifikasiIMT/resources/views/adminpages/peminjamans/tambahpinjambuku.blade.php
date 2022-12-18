@@ -19,9 +19,9 @@
             @endforeach
         </select></br>
         <label>Tanggal Pinjam</label></br>
-        <input type="date" name="pinjam_date" value="{{ $pinjam_date }" id="pinjam_date" class="form-control"></br>
+        <input type="date" name="pinjam_date" value="{{ $pinjam_date }}" id="pinjam_date" class="form-control" readonly></br>
         <label>Tanggal Kembali</label></br>
-        <input type="date" name="kembali_date" value="{{ $kembali_date }" id="kembali_date" class="form-control"></br>
+        <input type="date" name="kembali_date" value="{{ $kembali_date }}" id="kembali_date" class="form-control" readonly></br>
         <input type="hidden" name="status" id="status" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value= 1 />
         <input type="submit" value="Save" class="btn btn-success"></br>
