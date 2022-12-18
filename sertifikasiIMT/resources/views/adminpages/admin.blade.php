@@ -6,9 +6,14 @@
                 <div class="card">
                     <div class="card-header">Katalog Buku Admin</div>
                     <div class="card-body">
-                        <a href="{{ url('adminpages/addNewBook') }}" class="btn btn-success btn-sm" title="Tambah Buku Baru">
+                        <tr>
+                            <td><a href="{{ url('adminpages/peminjamans/pinjamindex') }}" class="btn btn-success btn-sm" title="Tambah Buku Baru">
+                            <i class="fa fa-plus" aria-hidden="true"></i> List Peminjaman Buku
+                            </a></td>
+                            <td><a href="{{ url('adminpages/addNewBook') }}" class="btn btn-success btn-sm" title="Tambah Buku Baru">
                             <i class="fa fa-plus" aria-hidden="true"></i> Tambah Buku
-                        </a>
+                        </a></td>
+                        </tr>
                         <br/>
                         <br/>
                         <div class="table-responsive">
@@ -36,11 +41,11 @@
                                         <td>
                                             <a href="{{ url('/adminpages/editBook/'. $itembuku->id ) }}" title="Ubah Detail Buku"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Ubah</button></a>
  
-                                            <form method="POST" action="{{ url('/adminpages/admin/' . $itembuku->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            <!-- <form method="POST" action="{{ url('/adminpages/admin/' . $itembuku->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Contact" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>
+                                            </form> -->
                                         </td>
                                     </tr>
                                 @endforeach

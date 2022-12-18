@@ -11,4 +11,8 @@ class SpefikasiBuku extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['namaBuku', 'penulis', 'bahasa', 'halaman', 'ISBN'];
 
+    public function peminjamans()
+    {
+        return $this->hasMany(Peminjaman::class, 'spesifikasiBuku_id', 'id');
+    }
 }

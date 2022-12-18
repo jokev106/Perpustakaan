@@ -28,9 +28,11 @@ Route::prefix('adminpages')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::get('/editBook/{id}', [App\Http\Controllers\SpesifikasiBukuController::class, 'edit']);
     Route::Patch('/editBook/{id}', [App\Http\Controllers\SpesifikasiBukuController::class, 'update']);
     Route::Delete('/admin/{id}', [App\Http\Controllers\SpesifikasiBukuController::class, 'destroy']);
+    Route::get('/peminjamans/pinjamindex', [App\Http\Controllers\PeminjamanController::class, 'index']);
+    Route::get('/peminjamans/tambahpinjambuku', [App\Http\Controllers\PeminjamanController::class, 'create']);
+    Route::post('/peminjamans/tambahpinjambuku', [App\Http\Controllers\PeminjamanController::class, 'store']);
+    Route::Patch('/peminjamans/pinjamindex/{id}', [App\Http\Controllers\PeminjamanController::class, 'update']);
 });
-
-// Route::post('/addNewBook',[App\Http\Controllers\AdminController::class, 'store'])->name('addNewBook');
 
 Auth::routes();
 

@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\SpefikasiBuku;
+use App\Models\Peminjaman;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
-class SpesifikasiBukuController extends Controller
+class PeminjamanController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,11 @@ class SpesifikasiBukuController extends Controller
     public function index()
     {
         //
-        return view('adminpages/addNewBook');
+        $peminjamans = Peminjaman::all();
+        $users = User::all();
+        $spesifikasiBuku = SpefikasiBuku::all();
+
+        return view('adminpages/peminjamans/pinjamindex', compact('peminjamans', 'users', 'spesifikasiBuku'));
     }
 
     /**
@@ -26,6 +36,13 @@ class SpesifikasiBukuController extends Controller
     public function create()
     {
         //
+        $users = User::all();
+        $spesifikasiBuku = SpefikasiBuku::all();
+
+        $pinjam_date = Carbon::now()->format('Y-m-d');
+        $kembali_date = Carbon::now()->addDays(7)->format('Y-m-d');
+
+        return view('adminpages/peminjamans/tambahpinjambuku', compact('users', 'spesifikasiBuku', 'pinjam_date', 'kembali_date'));
     }
 
     /**
@@ -38,8 +55,8 @@ class SpesifikasiBukuController extends Controller
     {
         //
         $input = $request->all();
-        SpefikasiBuku::create($input);
-        return redirect('adminpages/admin')->with('flash_message', 'Buku Sudah Ditambahkan!');  
+        Peminjaman::create($input);
+        return redirect('adminpages/peminjamans/pinjamindex');
     }
 
     /**
@@ -62,8 +79,8 @@ class SpesifikasiBukuController extends Controller
     public function edit($id)
     {
         //
-        $spesifikasiBuku = SpefikasiBuku::find($id);
-        return view('adminpages/editBook')->with('spesifikasiBuku', $spesifikasiBuku);
+        // $peminjamans = Peminjaman::find($id);
+        // return view('adminpages/pinjamans/pinjamindex')->with('peminjamans', $peminjamans);
     }
 
     /**
@@ -76,10 +93,12 @@ class SpesifikasiBukuController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $spesifikasiBuku = SpefikasiBuku::find($id);
+        // $peminjamans = Peminjaman::find($id);
+        $peminjamans = Peminjaman::find($id);
         $input = $request->all();
-        $spesifikasiBuku->update($input);
-        return redirect('adminpages/admin')->with('flash_message', 'Spesifikasi Buku Berubah!');  
+        $peminjamans->update($input);
+        return redirect('adminpages/peminjamans/pinjamindex')->with('flash_message', 'Buku Sudah Dikembalikan!');  
+        
     }
 
     /**
@@ -91,7 +110,8 @@ class SpesifikasiBukuController extends Controller
     public function destroy($id)
     {
         //
-        // SpefikasiBuku::destroy($id);
-        // return redirect('adminpages/admin')->with('flash_message', 'Buku Terhapus!');  
+        $peminjamans->delete();
+
+        return redirect('adminpages/peminjamans/pinjamindex');
     }
 }
