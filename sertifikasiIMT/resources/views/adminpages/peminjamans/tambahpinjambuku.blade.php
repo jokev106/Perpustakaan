@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="card">
-  <div class="card-header">Tambah Buku Baru</div>
+  <div class="card-header">Tambah Data Peminjam Buku</div>
   <div class="card-body">
       
       <form action="{{ url('adminpages/peminjamans/tambahpinjambuku') }}" method="post">
